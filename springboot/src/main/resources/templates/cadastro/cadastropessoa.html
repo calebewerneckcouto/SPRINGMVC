@@ -12,16 +12,18 @@
 </head>
 <body>
 
-<form action="salvarpessoa" method ="post">
+<form action="salvarpessoa" method ="post" th:object="${pessoaobj}">
+<label>ID:</label>
+<input name="id" th:field="*{id}"  readonly="true"/>
 
 <label>Nome:</label>
-<input name="nome" />
+<input name="nome" th:field="*{nome}"/>
 
 <label>Sobrenome:</label>
-<input name="sobrenome" />
+<input name="sobrenome" th:field="*{sobrenome}"/>
 
 <label>Idade:</label>
-<input name="idade" />
+<input name="idade" th:field="*{idade}"/>
 
 
 <input class="waves-effect waves-light btn" type="submit" value="Salvar">

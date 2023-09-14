@@ -21,31 +21,35 @@ public class PessoaController {
 	private PessoaRepository pessoaRepository;
 	
 	
-	@RequestMapping(method = RequestMethod.GET,value ="/cadastropessoa")
-	public String inicio() {
-		return "cadastro/cadastropessoa";
-	}
-	
-	@RequestMapping(method = RequestMethod.POST,value = "/salvarpessoa")
-	public ModelAndView salvar(Pessoa pessoa) {
-		
-		pessoaRepository.save(pessoa);
+	@GetMapping("/cadastropessoa")
+	public ModelAndView inicio() {
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
-		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
-		andView.addObject("pessoas",pessoasIt);
 		
-		
+		andView.addObject("pessoaobj", new Pessoa());
 		return andView;
-		
 	}
 	
-	@RequestMapping(method = RequestMethod.GET,value = "/listapessoas")
+	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
+	public ModelAndView salvar(Pessoa pessoa) {
+		pessoaRepository.save(pessoa);
+
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
+		andView.addObject("pessoas", pessoasIt);
+		andView.addObject("pessoaobj", new Pessoa());
+			
+		return andView;
+
+	}
+	
+	@GetMapping("/listapessoas")
 	public ModelAndView pessoas() {
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("pessoas",pessoasIt);
+		andView.addObject("pessoaobj",new Pessoa());
 		return andView;
 		
 			
@@ -54,8 +58,10 @@ public class PessoaController {
 	@GetMapping("/editarpessoa/{idpessoa}")
 	public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {
 		
-		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
+		
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+	
 		andView.addObject("pessoaobj", pessoa.get());
 		
 		return andView;
