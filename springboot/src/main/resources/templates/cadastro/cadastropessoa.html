@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8" />
-<title>Cadastro de Pessoas</title>
+<title>Spring</title>
 
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -11,26 +11,42 @@
   <link type="text/css" rel="stylesheet" href="/materialize.min.css"  media="screen,projection"/>
 </head>
 <body>
+<h3>Cadastro de Pessoas</h3>
+<div class="row" />
+<form action="salvarpessoa" method ="post" th:object="${pessoaobj}" class="col s12">
 
-<form action="salvarpessoa" method ="post" th:object="${pessoaobj}">
-<label>ID:</label>
-<input name="id" th:field="*{id}"  readonly="true"/>
-
-<label>Nome:</label>
-<input name="nome" th:field="*{nome}"/>
-
-<label>Sobrenome:</label>
+<div class="row">
+<div class="input-field col s6">
+<label for="id" class="active">ID:</label>
+<input name="id" th:field="*{id}"  id="id" readonly="true"/>
+</div>
+<div class="input-field col s6">
+<label for="nome" class="active">Nome:</label>
+<input name="nome" th:field="*{nome}" id="nome"/>
+</div>
+</div>
+<div class="row">
+<div class="input-field col s12">
+<label class="active" for="sobrenome">Sobrenome:</label>
 <input name="sobrenome" th:field="*{sobrenome}"/>
+</div>
+</div>
 
-<label>Idade:</label>
+<div class="row">
+<div class="input-field col s12">
+
+<label class="active" for="idade">Idade:</label>
 <input name="idade" th:field="*{idade}"/>
-
+</div>
+</div>
 
 <input class="waves-effect waves-light btn" type="submit" value="Salvar">
 
 
 </form>
 
+</br>
+</br>
 </br>
 </br>
 
