@@ -1,7 +1,11 @@
 package curso.springboot.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -44,8 +48,17 @@ public class PessoaController {
 		andView.addObject("pessoas",pessoasIt);
 		return andView;
 		
+			
 		
+	}
+	@GetMapping("/editarpessoa/{idpessoa}")
+	public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {
 		
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		Optional<Pessoa> pessoa = pessoaRepository.findById(idpessoa);
+		andView.addObject("pessoaobj", pessoa.get());
+		
+		return andView;
 		
 	}
 
