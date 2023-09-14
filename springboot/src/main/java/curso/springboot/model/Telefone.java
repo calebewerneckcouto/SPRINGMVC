@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 public class Telefone {
@@ -14,6 +17,18 @@ public class Telefone {
 	private String tipo;
 
 	private String numero;
+
+	@ManyToOne
+	@ForeignKey(name = "pessoa_id")
+	private Pessoa pessoa;
+
+	public Pessoa getPessoa() {
+		return pessoa;
+	}
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
+	}
 
 	public Long getId() {
 		return id;
