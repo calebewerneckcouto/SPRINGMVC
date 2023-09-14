@@ -87,7 +87,7 @@ public class PessoaController {
 		
 	}
 	
-	@PostMapping("*/pesquisarpessoa")
+	@PostMapping("/pesquisarpessoa")
 	public ModelAndView pesquisar(@RequestParam("nomepesquisa")String nomepesquisa) {
 		
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
