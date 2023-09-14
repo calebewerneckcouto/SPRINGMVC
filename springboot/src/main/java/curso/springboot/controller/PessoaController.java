@@ -4,6 +4,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +43,22 @@ public class PessoaController {
 		return andView;
 
 	}
+	
+	
+	@GetMapping("/excluirpessoa/{idpessoa}")
+	public ModelAndView excluir(@PathVariable("idpessoa") Long idpessoa) {
+	
+		pessoaRepository.deleteById(idpessoa);
+		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
+		andView.addObject("pessoas",pessoaRepository.findAll());
+		andView.addObject("pessoaobj",new Pessoa());
+		
+		
+		
+		return andView;
+		
+	}
+	
 	
 	@GetMapping("/listapessoas")
 	public ModelAndView pessoas() {
