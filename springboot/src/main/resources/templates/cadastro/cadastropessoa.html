@@ -13,7 +13,7 @@
 <body>
 <h3>Cadastro de Pessoas</h3>
 <div class="row" />
-<form action="salvarpessoa" method ="post" th:object="${pessoaobj}" class="col s12">
+<form action="salvarpessoa" method ="post" th:object="${pessoaobj}" class="col s12" id="document.getElementById('formpessoa').reset();">
 
 <div class="row">
 <div class="input-field col s6">
@@ -43,7 +43,7 @@
 <div class="input-field col s6">
 
 <input class="waves-effect waves-light btn" type="submit" value="Salvar">
-<button class="waves-effect waves-light btn">Novo</button>
+<button class="waves-effect waves-light btn" onclick=>Novo</button>
 </div>
 </div>
 </form>
