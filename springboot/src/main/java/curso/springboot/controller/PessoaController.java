@@ -30,7 +30,7 @@ public class PessoaController {
 		return andView;
 	}
 	
-	@RequestMapping(method = RequestMethod.POST, value = "/salvarpessoa")
+	@RequestMapping(method = RequestMethod.POST, value = "*/salvarpessoa")
 	public ModelAndView salvar(Pessoa pessoa) {
 		pessoaRepository.save(pessoa);
 
