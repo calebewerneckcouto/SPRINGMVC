@@ -1,5 +1,6 @@
 package curso.springboot.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -7,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
@@ -15,9 +17,18 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	
+	@Autowired
+	private ImplementacaoUserDetailService implementacaoUserDetailService;
+	
+	
+	
+	
+	
 	
 	@Override//Configura as solicitações de acesso por http
 	protected void configure(HttpSecurity http) throws Exception {
+		
+	
 		
 		http.csrf().disable()//Desativa as configurações padrão de memória.
 		.authorizeRequests()//Permitir/restringir acesso
@@ -32,11 +43,18 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 	@Override//Cria autenticação do usuario com o banco de dados ou em memoria
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
+		auth.userDetailsService(implementacaoUserDetailService)
+		.passwordEncoder(new BCryptPasswordEncoder());
+		
+		
+		
+		
+		/*
 		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
 		.withUser("cwc3d")
 		.password("cwc3d14694899")
 		.roles("ADMIN");
-		
+		*/
 	}
 	
 	@Override//ignorar URL especificas
