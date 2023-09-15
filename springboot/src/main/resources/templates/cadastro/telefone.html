@@ -66,27 +66,15 @@ form input[type=submit] {
  </form>
  </div>
  
- <table class="striped">
-  <thead>
-    <tr>
-     <th>ID</th>
-     <th>Numero</th>
-     <th>Tipo</th>
-    
-    </tr>
-  </thead>
-  <tr th:each = "telefone : ${telefones}">
-   <td th:text = "${telefone.id}"></td>
-   <td th:text = "${telefone.numero}"></td>
-   <td th:text = "${telefone.tipo}"></td>
-     
- 
-   
-  </tr>
+  <table class="striped">
+   <tr th:each="fone : ${telefones}">
+     <td th:text="${fone.numero}"/>
+     <td th:text="${fone.tipo}"/>
+     <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">Excluir</a> </td>
+   </tr>
  </table>
  
  <script type="text/javascript" src="/materialize/js/materialize.js"></script>
  <script type="text/javascript" src="/materialize/js/materialize.min.js"></script>
 </body>
 </html>
- 
