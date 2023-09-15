@@ -39,6 +39,7 @@ form input[type=submit] {
  </div>
  
  <h5>Telefones</h5>
+ <span th:text="${msgErro}"></span>
  <div class="row">
  <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12">
  <div class="row">
@@ -67,7 +68,15 @@ form input[type=submit] {
  </div>
  
   <table class="striped">
+   <tr>
+     
+     
+     <th>Numero</th>
+     <th>Tipo</th>
+      <th>Excluir</th>
+    </tr>
    <tr th:each="fone : ${telefones}">
+   
      <td th:text="${fone.numero}"/>
      <td th:text="${fone.tipo}"/>
      <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">Excluir</a> </td>

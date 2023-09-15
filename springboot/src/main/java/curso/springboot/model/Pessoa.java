@@ -31,6 +31,7 @@ public class Pessoa implements Serializable {
 	
 	
 	@Min( value = 18  ,message = "Idade invalida")
+	@NotNull(message = "Nao Pode ser nulo")
 	private int idade;
 	
 	@OneToMany(mappedBy="pessoa", cascade = CascadeType.ALL)
