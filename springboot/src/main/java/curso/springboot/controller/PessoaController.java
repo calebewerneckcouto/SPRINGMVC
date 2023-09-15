@@ -36,6 +36,7 @@ public class PessoaController {
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		andView.addObject("pessoas",pessoasIt);
 		
+		
 		andView.addObject("pessoaobj", new Pessoa());
 		return andView;
 	}
@@ -81,6 +82,25 @@ public class PessoaController {
 			
 		
 	}
+	
+	
+	@GetMapping("/listatelefones")
+	public ModelAndView telefones() {
+		
+		ModelAndView andView = new ModelAndView("cadastro/telefone");
+		Iterable<Telefone> telefonesIt = telefoneRepository.findAll();
+		andView.addObject("telefones",telefonesIt);
+		andView.addObject("pessoaobj",new Pessoa());
+		return andView;
+		
+			
+		
+	}
+	
+	
+	
+	
+	
 	@GetMapping("/editarpessoa/{idpessoa}")
 	public ModelAndView editar(@PathVariable("idpessoa") Long idpessoa) {
 		
@@ -89,6 +109,7 @@ public class PessoaController {
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 	
 		andView.addObject("pessoaobj", pessoa.get());
+		
 		
 		return andView;
 		
@@ -103,6 +124,7 @@ public class PessoaController {
 		ModelAndView andView = new ModelAndView("cadastro/telefone");
 	
 		andView.addObject("pessoaobj", pessoa.get());
+		andView.addObject("telefones",telefoneRepository.getTelefones(idpessoa));
 		
 		return andView;
 		
@@ -126,8 +148,12 @@ public class PessoaController {
 		
 		telefone.setPessoa(pessoa);
 		telefoneRepository.save(telefone);
-		
 		ModelAndView andView = new ModelAndView("cadastro/telefone");
+		andView.addObject("telefones",pessoa);
+		
+		andView.addObject("telefones",telefoneRepository.getTelefones(pessoaid));
+		
+		
 		
 		andView.addObject("pessoaobj",new Pessoa());
 		
