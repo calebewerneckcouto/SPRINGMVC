@@ -34,7 +34,8 @@ public class Pessoa implements Serializable {
 	private String bairro;
 	private String cidade;
 	private String uf;
-	
+	private String ibge;
+
 	private String sexo;
 
 	private String complemento;
@@ -141,8 +142,13 @@ public class Pessoa implements Serializable {
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
-	
-	
+
+	public String getIbge() {
+		return ibge;
+	}
+
+	public void setIbge(String ibge) {
+		this.ibge = ibge;
+	}
 
 }
