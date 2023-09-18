@@ -20,7 +20,7 @@ public class SpringbootApplication {
 		
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String result = encoder.encode("cwc3d14694899");
+		String result = encoder.encode("livinha");
 		System.out.println(result);
 		
 	}
