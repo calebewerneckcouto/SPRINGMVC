@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+<meta charset="UTF-8">
+<title>Inicio</title>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+	rel="stylesheet">
+<!-- Compiled and minified CSS -->
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+
+
+<style>
+
+ body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    
+    form {
+      text-align: center;
+      max-width: 400px;
+      padding: 80px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    img {
+      max-width: 100%;
+    }
+
+
+
+
+
+  form input[type=submit]{
+  
+   color: white;
+  }
+ 
+</style>
+</head>
+<body>
+
+<fieldset>
+
+<legend>Login</legend>
+	<form th:action="@{/login}" method="post" class="col s12">
+		<img alt="" src="spring.png">
+	
+
+
+		<div class="row">
+			<div class="input-field col s12">
+
+				<label>Login</label> <input type="text" name="username">
+
+
+           </div>
+       </div>
+       
+       
+       
+       <div class="row">
+			<div class="input-field col s12">
+
+				<label>Senha</label> 
+				<input type="password" name="password">
+
+
+           </div>
+       </div>
+       
+       
+       
+       <div class="row">
+			<div class="input-field col s6">
+
+				
+				<input  name="Logar" type="submit"  value="Logar"  class="waves-effect waves-ligjt btn"/>
+				
+
+
+           </div>
+       </div>
+
+
+
+	</form>
+</fieldset>
+
+
+</body>
+</html>
