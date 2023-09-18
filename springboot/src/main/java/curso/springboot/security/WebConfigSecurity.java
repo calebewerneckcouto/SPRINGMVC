@@ -9,55 +9,39 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-
 
 @Configuration
 @EnableWebSecurity
-public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
+public class WebConfigSecurity  extends WebSecurityConfigurerAdapter{
 	
 	@Autowired
-	private ImplementacaoUserDetailService implementacaoUserDetailService;
+	private ImplementacaoUserDetailsService implementacaoUserDetailsService;
 	
-	
-	
-	
-	
-	
-	@Override//Configura as solicitações de acesso por http
+	@Override // Configura as solicitações de acesso por Http
 	protected void configure(HttpSecurity http) throws Exception {
-		
-	
-		
-		http.csrf().disable()//Desativa as configurações padrão de memória.
-		.authorizeRequests()//Permitir/restringir acesso
-		.antMatchers(HttpMethod.GET, "/").permitAll()//Qualquer usuario acessa parte do sistema
+		http.csrf()
+		.disable() // Desativa as configurações padrão de memória.
+		.authorizeRequests() // Pertimi restringir acessos
+		.antMatchers(HttpMethod.GET, "/").permitAll() // Qualquer usuário acessa a pagina inicial
+		.antMatchers(HttpMethod.GET, "/cadastropessoa").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
-		.and().formLogin().permitAll()//permite qualquer usuario
-		.and().logout()//mapeia URL de Logout e invalida usuario autenticado
+		.and().formLogin().permitAll() // permite qualquer usuário
+		.and().logout() // Mapeia URL de Logout e invalida usuário autenticado
 		.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
 	
 	}
 	
-	@Override//Cria autenticação do usuario com o banco de dados ou em memoria
+	
+	@Override // Cria autenticação do usuário com banco de dados ou em memória
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-		auth.userDetailsService(implementacaoUserDetailService)
+		auth.userDetailsService(implementacaoUserDetailsService)
 		.passwordEncoder(new BCryptPasswordEncoder());
-		
-		
-		
-		
-		/*
-		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance())
-		.withUser("cwc3d")
-		.password("cwc3d14694899")
-		.roles("ADMIN");
-		*/
+	
 	}
 	
-	@Override//ignorar URL especificas
+	@Override // Ignora URL especificas
 	public void configure(WebSecurity web) throws Exception {
 		web.ignoring().antMatchers("/materialize/**");
 	}

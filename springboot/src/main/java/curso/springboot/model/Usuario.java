@@ -1,18 +1,23 @@
 package curso.springboot.model;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
 public class Usuario implements UserDetails {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -20,8 +25,20 @@ public class Usuario implements UserDetails {
 	private Long id;
 
 	private String login;
-
 	private String senha;
+	
+	@OneToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "usuarios_role", 
+	     joinColumns = @JoinColumn(name = "usuario_id", 
+	                   referencedColumnName = "id",
+	                   table = "usuario"),  // cria tabela de acesso do usuário
+			
+			inverseJoinColumns = @JoinColumn(name="role_id",
+								referencedColumnName = "id",
+								table = "role"))
+	
+	private List<Role> roles;
+	
 
 	public Long getId() {
 		return id;
@@ -49,43 +66,36 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+		return roles;
 	}
 
 	@Override
 	public String getPassword() {
-		// TODO Auto-generated method stub
 		return senha;
 	}
 
 	@Override
 	public String getUsername() {
-		// TODO Auto-generated method stub
 		return login;
 	}
 
 	@Override
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
 		return true;
 	}
 
