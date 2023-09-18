@@ -34,6 +34,8 @@ public class Pessoa implements Serializable {
 	private String bairro;
 	private String cidade;
 	private String uf;
+	
+	private String sexo;
 
 	private String complemento;
 
@@ -131,5 +133,16 @@ public class Pessoa implements Serializable {
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
 	}
+
+	public String getSexo() {
+		return sexo;
+	}
+
+	public void setSexo(String sexo) {
+		this.sexo = sexo;
+	}
+	
+	
+	
 
 }
