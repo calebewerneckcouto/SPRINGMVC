@@ -31,6 +31,9 @@ public class PessoaController{
 	
 	@Autowired
 	private TelefoneRepository telefoneRepository; 
+	
+	@Autowired
+	private ReportUtil reportUtil;
 
 	@RequestMapping(method = RequestMethod.GET, value = "/cadastropessoa")
 	public ModelAndView inicio() {
