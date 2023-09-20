@@ -46,17 +46,6 @@ form input[type=submit] {
 		<span th:text="${m}"></span>
 	</div>
 	<br />
-	
-	<fieldset>
-	
-	<legend>Menu</legend>
-	 <a th:href="@{/profissao/}">Cad.Profissões</a>
-	
-	</fieldset>
-	
-	
-	
-	
 	<fieldset>
 
 		<img alt="" src="/static/imagem.png">
@@ -64,8 +53,7 @@ form input[type=submit] {
 		<legend>Cadastro de Pessoas</legend>
 
 		<div class="row">
-         
-        
+
 
 			<form action="salvarpessoa" id="formpessoa" method="post"
 				th:object="${pessoaobj}" class="col s12">
@@ -269,8 +257,6 @@ form input[type=submit] {
 			<td th:text="${pessoa.id}"></td>
 			<td><a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}"><span
 					th:text="${pessoa.nome}"></span></a></td>
-					
-			
 			<td th:text="${pessoa.sobrenome}"></td>
 			<td th:text="${pessoa.idade}"></td>
 			<td><a
