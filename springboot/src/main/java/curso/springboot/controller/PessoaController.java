@@ -48,6 +48,7 @@ public class PessoaController {
 		Iterable<Pessoa> pessoasIt = pessoaRepository.findAll();
 		modelAndView.addObject("pessoas", pessoasIt);
 		modelAndView.addObject("profissoes",profissaoRepository.findAll());
+		
 		return modelAndView;
 	}
 

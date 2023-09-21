@@ -25,7 +25,7 @@ public class SpringbootApplication implements WebMvcConfigurer {
 		
 		
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-		String result = encoder.encode("livinha");
+		String result = encoder.encode("cwc3d14694899");
 		System.out.println(result);
 		
 	}

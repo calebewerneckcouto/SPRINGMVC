@@ -34,6 +34,11 @@ public class Pessoa implements Serializable {
 	@NotNull(message = "Sobrenome não pode ser nulo")
 	@NotEmpty(message = "Sobrenome não pode ser vazio")
 	private String sobrenome;
+	
+	
+	
+	
+	
 
 	@ManyToOne
 	private Profissao profissao;
@@ -57,6 +62,9 @@ public class Pessoa implements Serializable {
 	@Min(value = 18, message = "Idade invalida")
 	@NotNull(message = "Nao Pode ser nulo")
 	private int idade;
+	
+	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Documentos> documentos;
 
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
@@ -181,5 +189,17 @@ public class Pessoa implements Serializable {
 	public Date getDataNascimento() {
 		return dataNascimento;
 	}
+
+	public List<Documentos> getDocumentos() {
+		return documentos;
+	}
+
+	public void setDocumentos(List<Documentos> documentos) {
+		this.documentos = documentos;
+	}
+
+	
+	
+	
 
 }
