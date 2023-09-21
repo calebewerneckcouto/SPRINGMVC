@@ -85,25 +85,29 @@ form input[type=submit] {
 						</div>
 					</div>
 					</div>
+					
+					
+					
+					
+					
+					
 
 					<div class="row">
+					
+					<div class="input-field col s6">
+					<label for="dataNascimento" class="active">Data de Nascimento</label>
+					
+					<input type="date" id="dataNascimento" th:field=*{dataNascimento}>
+					
+					</div>
+					
 						<div class="input-field col s6">
 							<label for="sobrenome" class="active">Sobrenome</label> <input
 								name="sobrenome" class="validate" th:field="*{sobrenome}"
 								id="sobrenome" required="required">
 						</div>
 
-						<div class="input-field col s6">
-				 <label for="sexo" class="active">Sexo</label>
-				 <select class="browser-default" name="sexo" id="sexo">
-						   <option value="">--[Selecione]--</option>
-						   <option value="MASCULINO" th:text="Masculino"/>
-						   <option value="FEMININO" th:text="Feminino"/>
-						   
-						   
-			     </select>
-						   
-				</div>
+						
 			</div>
 
 
@@ -120,15 +124,22 @@ form input[type=submit] {
 						</div>
 						
 						
+						
+						
 						<div class="input-field col s6">
-				 <label for="profissao" class="active">Profissão</label>
-				 <select class="browser-default" name="profissao" id="profissao"  th:field="*{profissao}">
+				 <label for="sexo" class="active">Sexo</label>
+				 <select class="browser-default" name="sexo" id="sexo">
+						   <option value="">--[Selecione]--</option>
+						   <option value="MASCULINO" th:text="Masculino"/>
+						   <option value="FEMININO" th:text="Feminino"/>
 						   
-						<option th:each = "p : ${profissoes}" th:value="${p.id}" th:text="${p.profissao}" >   
 						   
 			     </select>
 						   
 				</div>
+						
+						
+						
 						
 						
 						
@@ -138,6 +149,17 @@ form input[type=submit] {
 
 
 					<div class="row">
+					
+					
+					<div class="input-field col s6">
+				 <label for="profissao" class="active">Profissão</label>
+				 <select class="browser-default" name="profissao" id="profissao"  th:field="*{profissao}">
+						   
+						<option th:each = "p : ${profissoes}" th:value="${p.id}" th:text="${p.profissao}" >   
+						   
+			     </select>
+						   
+				</div>
 						<div class="input-field col s6">
 							<label for="cep" class="active">Cep</label> <input name="cep"
 								th:field="*{cep}" id="cep" class="validate" required="required"
@@ -146,26 +168,29 @@ form input[type=submit] {
 				
 					
 					
+</div>
 
 
+
+				
+					
 					<div class="row">
 						<div class="input-field col s6">
 							<label for="rua" class="active">Rua</label> <input name="rua"
 								th:field="*{rua}" id="rua" class="validate" required="required"
 								type="text">
 						</div>
-						</div>
-
-
-					<div class="row">
+						
+					
+					
 						<div class="input-field col s6">
 							<label for="complemento" class="active">Complemento</label> <input
 								name="complemento" th:field="*{complemento}" id="complemento"
 								class="validate" required="required" type="text">
 						</div>
 					
-					</div>
-
+					
+</div>
 
 
 					<div class="row">
@@ -175,7 +200,7 @@ form input[type=submit] {
 								required="required" type="text">
 						</div>
 				
-</div>
+
 
 
 					<div class="row">
@@ -186,7 +211,7 @@ form input[type=submit] {
 						</div>
 					
 	</div>
-
+</div>
 
 
 
@@ -196,7 +221,7 @@ form input[type=submit] {
 								th:field="*{uf}" id="uf" class="validate" required="required"
 								type="text">
 						</div>
-						</div>
+						
 						
 						
 						
@@ -205,7 +230,7 @@ form input[type=submit] {
 								name="ibge" th:field="*{ibge}" id="ibge" class="validate"
 								required="required" type="text">
 						</div>
-						
+						</div>
 						
 						
 						
