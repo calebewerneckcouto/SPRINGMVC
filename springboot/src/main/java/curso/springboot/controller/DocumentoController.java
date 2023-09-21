@@ -91,12 +91,7 @@ public class DocumentoController {
 
 		
 
-		documentos.setPessoa(pessoa);
-
-		documentoRepository.save(documentos);
-
-		modelAndView.addObject("pessoaobj", pessoa);
-		modelAndView.addObject("documentos", documentoRepository.findAll());
+	
 		return modelAndView;
 	}
 		
