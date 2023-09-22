@@ -109,12 +109,15 @@ public class DocumentoController {
 
 	@GetMapping("/removerdocumento/{iddocumento}")
 	public ModelAndView removerdocumento(@PathVariable("iddocumento") Long id) {
+		
+		
+		Pessoa pessoa = new Pessoa();
 
 		documentoRepository.deleteById(id);
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/documentos");
 		
-
+		modelAndView.addObject("pessoaobj", pessoa);
 		modelAndView.addObject("documentos", documentoRepository.findAll());
 		return modelAndView;
 
