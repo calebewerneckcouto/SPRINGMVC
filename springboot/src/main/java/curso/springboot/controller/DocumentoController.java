@@ -20,6 +20,7 @@ import curso.springboot.model.Documentos;
 import curso.springboot.model.Pessoa;
 import curso.springboot.respository.DocumentoRepository;
 import curso.springboot.respository.PessoaRepository;
+import javassist.expr.NewArray;
 import net.sf.jasperreports.data.http.RequestMethod;
 
 @Controller
@@ -40,18 +41,20 @@ public class DocumentoController {
 	
 	
 
-	@RequestMapping(method = org.springframework.web.bind.annotation.RequestMethod.POST, value = "upload", consumes = {"multipart/form-data" })
-	public ModelAndView salvardocumento(@RequestParam("documento") String documento, final MultipartFile file)
+	@RequestMapping(method = org.springframework.web.bind.annotation.RequestMethod.POST, value = "upload/{pessoaid}", consumes = {"multipart/form-data" })
+	public ModelAndView salvardocumento(@RequestParam("documento") String documento, final MultipartFile file,@PathVariable("pessoaid") Long pessoaid)
 			throws IOException {
 
 		Documentos doc = new Documentos();
        
 		
-		
+		Pessoa pessoa = pessoaRepository.findById(pessoaid).get();
 		
 			doc.setDocumento(documento);
 			doc.setFile(file.getBytes());
-		
+		    doc.setNomefile(file.getOriginalFilename());
+		    doc.setTipofile(file.getContentType());
+		    doc.setPessoa(pessoa);
 		
 	
 			documentoRepository.save(doc);
@@ -59,6 +62,7 @@ public class DocumentoController {
 		
 
 		ModelAndView andView = new ModelAndView("cadastro/documentos");
+		andView.addObject("pessoaobj", pessoa);
 		andView.addObject("documentos", documentoRepository.findAll());
 
 		return andView;
@@ -109,6 +113,7 @@ public class DocumentoController {
 		documentoRepository.deleteById(id);
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/documentos");
+		
 
 		modelAndView.addObject("documentos", documentoRepository.findAll());
 		return modelAndView;

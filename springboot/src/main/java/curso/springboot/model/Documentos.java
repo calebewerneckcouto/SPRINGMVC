@@ -28,6 +28,40 @@ public class Documentos implements Serializable {
 
 	@Lob
 	private byte[] file;
+	
+	
+	private String tipofile;
+	
+	private String nomefile;
+	
+	
+	
+	
+	
+
+	public Pessoa getPessoas() {
+		return pessoas;
+	}
+
+	public void setPessoas(Pessoa pessoas) {
+		this.pessoas = pessoas;
+	}
+
+	public String getTipofile() {
+		return tipofile;
+	}
+
+	public void setTipofile(String tipofile) {
+		this.tipofile = tipofile;
+	}
+
+	public String getNomefile() {
+		return nomefile;
+	}
+
+	public void setNomefile(String nomefile) {
+		this.nomefile = nomefile;
+	}
 
 	public Long getId() {
 		return id;

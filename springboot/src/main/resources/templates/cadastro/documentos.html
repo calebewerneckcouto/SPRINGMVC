@@ -48,7 +48,7 @@ form input[type=submit] {
 	<span th:text="${msg}"></span>
 
 	<div class="row">
-		<form th:action="@{/upload}" method="post" class="col s12"
+		<form th:action="@{/upload/{pessoaid}(pessoaid=${pessoaobj.id})}" method="post" class="col s12"
 			enctype="multipart/form-data">
 
 
@@ -97,14 +97,15 @@ form input[type=submit] {
 
 			<th>ID</th>
 			<th>Tipo de Documento</th>
-			<th>Arquivo</th>
+			<th>Formato</th>
+			
 			<th>Excluir</th>
 		</tr>
 		<tr th:each="doc : ${documentos}">
 
 			<td th:text="${doc.id}" />
 			<td th:text="${doc.documento}" />
-			<td th:text="${doc.file}" />
+			<td th:text="${doc.tipofile}" />
 
 			<td><a
 				th:href="@{/removerdocumento/{iddocumento}(iddocumento=${doc.id})}">Excluir</a>
