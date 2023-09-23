@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import curso.springboot.model.Usuario;
-import curso.springboot.respository.UsuarioRepository;
+import curso.springboot.repository.UsuarioRepository;
 
 @Service
 @Transactional

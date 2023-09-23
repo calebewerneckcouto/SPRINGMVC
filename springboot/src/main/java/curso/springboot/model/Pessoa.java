@@ -6,9 +6,12 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
@@ -31,82 +34,93 @@ public class Pessoa implements Serializable {
 	@NotNull(message = "Nome não pode ser nulo")
 	@NotEmpty(message = "Nome não pode ser vazio")
 	private String nome;
+
 	@NotNull(message = "Sobrenome não pode ser nulo")
 	@NotEmpty(message = "Sobrenome não pode ser vazio")
 	private String sobrenome;
-	
-	
-	
-	
-	
 
-	@ManyToOne
-	private Profissao profissao;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@Temporal(TemporalType.DATE)
-	private Date dataNascimento;
-	
-	
+	@Min(value = 18, message = "Idade inválida")
+	private int idade;
 
 	private String cep;
 	private String rua;
+	private String numero;
+	private String complemento;
 	private String bairro;
 	private String cidade;
 	private String uf;
 	private String ibge;
 
-	private String sexo;
+	private String sexopessoa;
 
-	private String complemento;
-
-	@Min(value = 18, message = "Idade invalida")
-	@NotNull(message = "Nao Pode ser nulo")
-	private int idade;
 	
-	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL)
-	private List<Documentos> documentos;
+	private String profissao;
 
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
-	public void setTelefones(List<Telefone> telefones) {
-		this.telefones = telefones;
+	
+
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@Temporal(TemporalType.DATE)
+	private Date dataNascimento;
+
+	@Lob
+	private byte[] curriculo;
+
+	private String nomeFileCurriculo;
+	private String tipoFileCurriculo;
+	
+	
+	
+	
+	
+
+	public void setProfissao(String profissao) {
+		this.profissao = profissao;
 	}
 
-	public List<Telefone> getTelefones() {
-		return telefones;
+	public String getNomeFileCurriculo() {
+		return nomeFileCurriculo;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
+	public void setNomeFileCurriculo(String nomeFileCurriculo) {
+		this.nomeFileCurriculo = nomeFileCurriculo;
 	}
 
-	public int getIdade() {
-		return idade;
+	public String getTipoFileCurriculo() {
+		return tipoFileCurriculo;
 	}
 
-	public Long getId() {
-		return id;
+	public void setTipoFileCurriculo(String tipoFileCurriculo) {
+		this.tipoFileCurriculo = tipoFileCurriculo;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setCurriculo(byte[] curriculo) {
+		this.curriculo = curriculo;
 	}
 
-	public String getNome() {
-		return nome;
+	public byte[] getCurriculo() {
+		return curriculo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDataNascimento(Date dataNascimento) {
+		this.dataNascimento = dataNascimento;
 	}
 
-	public String getSobrenome() {
-		return sobrenome;
+	public Date getDataNascimento() {
+		return dataNascimento;
 	}
 
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+	
+
+	public void setSexopessoa(String sexopessoa) {
+		this.sexopessoa = sexopessoa;
+	}
+
+	
+	public String getSexopessoa() {
+		return sexopessoa;
 	}
 
 	public String getCep() {
@@ -149,22 +163,6 @@ public class Pessoa implements Serializable {
 		this.uf = uf;
 	}
 
-	public String getComplemento() {
-		return complemento;
-	}
-
-	public void setComplemento(String complemento) {
-		this.complemento = complemento;
-	}
-
-	public String getSexo() {
-		return sexo;
-	}
-
-	public void setSexo(String sexo) {
-		this.sexo = sexo;
-	}
-
 	public String getIbge() {
 		return ibge;
 	}
@@ -173,32 +171,65 @@ public class Pessoa implements Serializable {
 		this.ibge = ibge;
 	}
 
-	public Profissao getProfissao() {
+	public void setTelefones(List<Telefone> telefones) {
+		this.telefones = telefones;
+	}
+
+	public List<Telefone> getTelefones() {
+		return telefones;
+	}
+
+	public void setIdade(int idade) {
+		this.idade = idade;
+	}
+
+	public int getIdade() {
+		return idade;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+
+	public String getProfissao() {
 		return profissao;
 	}
 
-	public void setProfissao(Profissao profissao) {
-		this.profissao = profissao;
-	}
-	
-	
-	public void setDataNascimento(Date dataNascimento) {
-		this.dataNascimento = dataNascimento;
-	}
-	
-	public Date getDataNascimento() {
-		return dataNascimento;
+	public String getNumero() {
+		return numero;
 	}
 
-	public List<Documentos> getDocumentos() {
-		return documentos;
+	public void setNumero(String numero) {
+		this.numero = numero;
 	}
 
-	public void setDocumentos(List<Documentos> documentos) {
-		this.documentos = documentos;
+	public String getComplemento() {
+		return complemento;
 	}
 
-	
+	public void setComplemento(String complemento) {
+		this.complemento = complemento;
+	}
 	
 	
 
