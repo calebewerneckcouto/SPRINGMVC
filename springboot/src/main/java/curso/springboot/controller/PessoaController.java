@@ -28,6 +28,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import curso.springboot.model.Pessoa;
 import curso.springboot.model.Telefone;
+import curso.springboot.repository.DocumentoRepository;
 import curso.springboot.repository.PessoaRepository;
 import curso.springboot.repository.ProfissaoRepository;
 import curso.springboot.repository.TelefoneRepository;
@@ -37,6 +38,9 @@ public class PessoaController{
 
 	@Autowired
 	private PessoaRepository pessoaRepository;
+	
+	@Autowired
+	private DocumentoRepository documentoRepository;
 	
 	@Autowired
 	private TelefoneRepository telefoneRepository; 
@@ -66,6 +70,7 @@ public class PessoaController{
 		model.addObject("pessoas", pagePessoa);
 		model.addObject("pessoaobj", new Pessoa());
 		model.addObject("nomepesquisa", nomepesquisa);
+		model.addObject("profissoes", profissaoRepository.findAll());
 		model.setViewName("cadastro/cadastropessoa");
 		
 		return model;
@@ -80,6 +85,8 @@ public class PessoaController{
 		
 		
 		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
+		pessoa.setDocumentos(documentoRepository.getdocumentos(pessoa.getId()));
+		
 		
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
@@ -102,6 +109,7 @@ public class PessoaController{
 
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoas", pessoaRepository.findAll(PageRequest.of(0, 5, Sort.by("nome"))));
+		andView.addObject("profissoes", profissaoRepository.findAll());
 		andView.addObject("pessoaobj", new Pessoa());
 			
 		return andView;
@@ -113,6 +121,8 @@ public class PessoaController{
 		ModelAndView andView = new ModelAndView("cadastro/cadastropessoa");
 		andView.addObject("pessoas", pessoaRepository.findAll(PageRequest.of(0, 5, Sort.by("nome"))));
 		andView.addObject("pessoaobj", new Pessoa());
+		andView.addObject("profissoes", profissaoRepository.findAll());
+		
 		return andView;
 	}
 	
@@ -124,6 +134,7 @@ public class PessoaController{
 
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoaobj", pessoa.get());
+		modelAndView.addObject("pessoaobj", new Pessoa());
 		modelAndView.addObject("profissoes", profissaoRepository.findAll());
 		return modelAndView;
 		
@@ -138,6 +149,7 @@ public class PessoaController{
 		ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");
 		modelAndView.addObject("pessoas", pessoaRepository.findAll(PageRequest.of(0, 5, Sort.by("nome"))));
 		modelAndView.addObject("pessoaobj", new Pessoa());
+		modelAndView.addObject("profissoes", profissaoRepository.findAll());
 		return modelAndView;
 		
 	}
@@ -159,6 +171,7 @@ public class PessoaController{
 		modelAndView.addObject("pessoas", pessoas);
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		modelAndView.addObject("nomepesquisa", nomepesquisa);
+		modelAndView.addObject("profissoes", profissaoRepository.findAll());
 		
 		return modelAndView;
 	}
@@ -166,31 +179,7 @@ public class PessoaController{
 
 	
 	
-	@GetMapping("**/baixarcurriculo/{idpessoa}")
-	public void baixarcurriculo(@PathVariable("idpessoa") Long idpessoa, 
-			HttpServletResponse response) throws IOException {
-		
-		/*Consultar o obejto pessoa no banco de dados*/
-		Pessoa pessoa = pessoaRepository.findById(idpessoa).get();
-		if (pessoa.getCurriculo() != null) {
 	
-			/*Setar tamanho da resposta*/
-			response.setContentLength(pessoa.getCurriculo().length);
-			
-			/*Tipo do arquivo para download ou pode ser generica application/octet-stream*/
-			response.setContentType(pessoa.getTipoFileCurriculo());
-			
-			/*Define o cabe�alho da resposta*/
-			String headerKey = "Content-Disposition";
-			String headerValue = String.format("attachment; filename=\"%s\"", pessoa.getNomeFileCurriculo());
-			response.setHeader(headerKey, headerValue);
-			
-			/*Finaliza a resposta passando o arquivo*/
-			response.getOutputStream().write(pessoa.getCurriculo());
-			
-		}
-		
-	} 
 	
 	
 	

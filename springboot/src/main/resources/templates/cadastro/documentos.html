@@ -22,6 +22,7 @@ form input[type=submit] {
 </style>
 </head>
 <body>
+
 <fieldset>
 
 <legend>Menu</legend>
@@ -35,7 +36,7 @@ form input[type=submit] {
 </fieldset>
 
 <fieldset>
-<legend>Cadastro de Telefones</legend>
+<legend>Cadastro de Documentos</legend>
 
 
  <a class="waves-effect waves-light btn" href="/cadastropessoa">Cad. Pessoa</a>
@@ -52,7 +53,7 @@ form input[type=submit] {
  
  <fieldset>
  
- <legend>Telefones</legend>
+ <legend>Documentos</legend>
  
 
  
@@ -64,18 +65,23 @@ form input[type=submit] {
 <br/>
  
  <div class="row">
-   <form th:action="@{/addfonePessoa/{pessoaid}(pessoaid=${pessoaobj.id})}"
-    method="post" class="col s12" onsubmit="return validarCampos()? true : false">
+   <form th:action="@{/upload/{pessoaid}(pessoaid=${pessoaobj.id})}" id="formpessoa" method="post" th:object="${pessoaobj}" class="col s12" 
+  enctype="multipart/form-data">
     <div class="row">
     	<div class="input-field col s6">
-    	  <label class="active" for="numero">Número:</label>
-    	  <input id="numero" name="numero" class="validate">
+    	  <label class="active" for="descricao">Descricão:</label>
+    	  <input id="descricao" name="descricao" class="validate" required="required">
     	</div>
     	
-    	<div class="input-field col s6">
-    	  <label class="active" for="tipo">Tipo:</label>
-    	  <input id="tipo" name="tipo" class="validate">
-    	</div>
+    	
+    	<div class="row">
+			  <div class="input-field col s12">
+			  <label for="file" class="active">Arquivo:</label>
+			    <input type="file" id="file" name="file" class="validate" required="required">
+			  </div>
+			</div>
+    	
+    	
     	
     	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
     </div>
@@ -85,35 +91,32 @@ form input[type=submit] {
  </fieldset>
  
  <table class="striped">
- <thead>
-    <tr>
+ <tr>
      <th>ID</th>
-     <th>Numero</th>
-     <th>Tipo</th>
+     <th>Descrição</th>
+     <th>Tipo de Arquivo</th>
+    <th>Download</th>
      <th>Excluir</th>
     </tr>
-  </thead>
-   <tr th:each="fone : ${telefones}">
-    <td th:text="${fone.id}"/>
-     <td th:text="${fone.numero}"/>
-     <td th:text="${fone.tipo}"/>
-     <td><a th:href="@{/removertelefone/{idtelefone}(idtelefone=${fone.id})}">Excluir</a> </td>
+   <tr th:each="doc : ${documentos}">
+     <td th:text="${doc.id}"/>
+        <td th:text="${doc.descricao}"/>
+           <td th:text="${doc.tipofile}"/>
+     <td><a th:href="@{/baixarfile/{iddocumento}(iddocumento=${doc.id})}">Download</a> </td>
+     <td><a th:href="@{/removerdocumento/{iddocumento}(iddocumento=${doc.id})}">Excluir</a> </td>
    </tr>
  </table>
 
  <script type="text/javascript">
   function validarCampos(){
-	  numero = document.getElementById('numero').value;
-	  tipo = document.getElementById('tipo').value;
+	  descricao = document.getElementById('descricao').value;
+	 
 	  
-	  if (numero === ''){
-		  alert('Numero deve ser informado');
+	  if (descricao === ''){
+		  alert('Descricao deve ser informada');
 		  return false;
 	  }
-	  else if (tipo === '') {
-		  alert('Tipo deve ser informado');
-		  return false;
-	  }
+	  
 	  
 	  return true;
   }

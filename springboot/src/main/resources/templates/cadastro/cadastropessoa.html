@@ -52,11 +52,19 @@ table th {
 </head>
 
 <body>
+
+<form>
 <fieldset>
 
 <legend>Menu</legend>
- <td><a th:href="logout"><span>Logout</span></a></td>
+ <a th:href="logout"><span>Logout</span></a>
+ 
+ <br/>
+<a  href="/profissao">Cad.Profissão</a>	
+
 </fieldset>
+
+
 
 <fieldset>
 <legend>Cadastro de pessoa</legend>
@@ -69,7 +77,7 @@ table th {
 <br/>
 
 
-
+</form>
 
 
 <form action="salvarpessoa" id="formpessoa" method="post" th:object="${pessoaobj}" class="col s12" 
@@ -260,11 +268,11 @@ enctype="multipart/form-data">
      <th>Excluir</th>
     </tr>
   </thead>
-  <tr th:each = "pessoa : ${pessoas.content}">
+  <tr th:each = "pessoa : ${pessoas}">
    <td th:text = "${pessoa.id}"></td>
    <td><a th:href="@{/telefones/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text = "${pessoa.nome}"></span></a></td>
    <td th:text = "${pessoa.sobrenome}"></td>
-  <td><a th:href="@{/documentos/{idpessoa}(idpessoa=${pessoa.id})}"><span ></span>Documentos</a></td>
+  <td><a th:href="@{/documentos/{idpessoa}(idpessoa=${pessoa.id})}"><span th:text ="Documentos" ></span></a></td>
    <td><a th:href="@{/editarpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Editar</a> </td>
    <td><a th:href="@{/removerpessoa/{idpessoa}(idpessoa=${pessoa.id})}">Excluir</a> </td>
   </tr>

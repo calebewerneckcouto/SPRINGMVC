@@ -4,6 +4,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.ForeignKey;
 
 @Entity
 public class Documentos {
@@ -15,11 +19,16 @@ public class Documentos {
 	
 	private String descricao;
 	
-	
+	@Lob
+	private byte[] file;
+
+	@ForeignKey(name="pessoa_id")
+	@ManyToOne
+	private Pessoa pessoas;
 	
 	private String nomefile;
 	
-	
+	private String tipofile;
 	
 	
 	
@@ -87,7 +96,39 @@ public class Documentos {
 
 
 
-	private String tipofile;
+	
+
+
+
+
+
+	public byte[] getFile() {
+		return file;
+	}
+
+
+
+
+
+	public void setFile(byte[] file) {
+		this.file = file;
+	}
+
+
+
+
+
+	public Pessoa getPessoa() {
+		return pessoas;
+	}
+
+
+
+
+
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoas = pessoa;
+	}
 	
 	
 	

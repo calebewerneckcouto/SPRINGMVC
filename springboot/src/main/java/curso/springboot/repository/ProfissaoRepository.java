@@ -16,5 +16,9 @@ public interface ProfissaoRepository extends CrudRepository<Profissao, Long> {
 	
 	@Query("select p from Profissao p")	
 	   public List<Profissao> getprofissoes(Long id);
+	
+	
+
+
 
 }

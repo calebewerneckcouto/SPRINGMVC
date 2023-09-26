@@ -59,17 +59,14 @@ public class Pessoa implements Serializable {
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
 
-	
+	@OneToMany(mappedBy = "pessoas", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Documentos> documentos;
 
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@Temporal(TemporalType.DATE)
 	private Date dataNascimento;
 
-	@Lob
-	private byte[] curriculo;
-
-	private String nomeFileCurriculo;
-	private String tipoFileCurriculo;
+	
 	
 	
 	
@@ -80,29 +77,7 @@ public class Pessoa implements Serializable {
 		this.profissao = profissao;
 	}
 
-	public String getNomeFileCurriculo() {
-		return nomeFileCurriculo;
-	}
-
-	public void setNomeFileCurriculo(String nomeFileCurriculo) {
-		this.nomeFileCurriculo = nomeFileCurriculo;
-	}
-
-	public String getTipoFileCurriculo() {
-		return tipoFileCurriculo;
-	}
-
-	public void setTipoFileCurriculo(String tipoFileCurriculo) {
-		this.tipoFileCurriculo = tipoFileCurriculo;
-	}
-
-	public void setCurriculo(byte[] curriculo) {
-		this.curriculo = curriculo;
-	}
-
-	public byte[] getCurriculo() {
-		return curriculo;
-	}
+	
 
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
@@ -229,6 +204,18 @@ public class Pessoa implements Serializable {
 
 	public void setComplemento(String complemento) {
 		this.complemento = complemento;
+	}
+
+
+
+	public List<Documentos> getDocumentos() {
+		return documentos;
+	}
+
+
+
+	public void setDocumentos(List<Documentos> documentos) {
+		this.documentos = documentos;
 	}
 	
 	
