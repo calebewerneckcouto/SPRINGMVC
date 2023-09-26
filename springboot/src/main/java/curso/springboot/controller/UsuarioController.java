@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,8 +38,15 @@ public class UsuarioController {
 				ModelAndView modelAndView = new ModelAndView("cadastro/usuarios");
 
 		
+	
+		
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		String result = encoder.encode(senha);
+		
 		usuario.setLogin(login);
-		usuario.setSenha(senha);
+		usuario.setSenha(result);
 		usuario.setNome(nome);
 		
 		
