@@ -32,6 +32,7 @@ import curso.springboot.repository.DocumentoRepository;
 import curso.springboot.repository.PessoaRepository;
 import curso.springboot.repository.ProfissaoRepository;
 import curso.springboot.repository.TelefoneRepository;
+import curso.springboot.repository.UsuarioRepository;
 
 @Controller
 public class PessoaController{
@@ -47,6 +48,9 @@ public class PessoaController{
 	
 	@Autowired
 	private ReportUtil reportUtil;
+	
+	@Autowired
+	private UsuarioRepository usuarioRepository;
 	
 	@Autowired
 	private ProfissaoRepository profissaoRepository;
@@ -86,7 +90,7 @@ public class PessoaController{
 		
 		pessoa.setTelefones(telefoneRepository.getTelefones(pessoa.getId()));
 		pessoa.setDocumentos(documentoRepository.getdocumentos(pessoa.getId()));
-		
+				
 		
 		if (bindingResult.hasErrors()) {
 			ModelAndView modelAndView = new ModelAndView("cadastro/cadastropessoa");

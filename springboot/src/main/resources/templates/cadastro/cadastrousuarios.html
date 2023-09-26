@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SpringBoot/Usuarios</title>
+
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd) {
+	background-color: rgba(158, 154, 154, 0.5);
+}
+
+form input[type=submit] {
+ color: white;
+}
+</style>
+</head>
+<body>
+<fieldset>
+
+<legend>Menu</legend>
+ <a th:href="logout"><span>Logout</span></a>
+ 
+ <br/>
+<a  href="/profissao">Cad.Profissão</a>	
+<br/>
+<a  href="/cadastropessoa">Cad.Pessoas</a>	
+
+</fieldset>
+
+<fieldset>
+<legend>Cadastro de Usuarios</legend>
+
+
+ <a class="waves-effect waves-light btn" href="/cadastropessoa">Cad. Pessoa</a>
+ <fieldset>
+ 
+ <legend>Usuarios</legend>
+ 
+
+ 
+
+<br/>
+    <div th:each = "m : ${msg}">
+        <span th:text = "${m}"> </span>
+    </div>
+<br/>
+ 
+ <div class="row">
+   <form th:action="@{/addusuario/{pessoaid}(pessoaid=${pessoaobj.id})}"
+    method="post" class="col s12" onsubmit="return validarCampos()? true : false">
+    <div class="row">
+    	<div class="input-field col s6">
+    	  <label class="active" for="login">Login:</label>
+    	  <input id="login" name="login" class="validate">
+    	</div>
+    	
+    	<div class="input-field col s6">
+    	  <label class="active" for="senha">Senha:</label>
+    	  <input type="password"    id="senha" name="senha" class="validate">
+    	</div>
+    	
+    	
+    	<div class="input-field col s6">
+    	  <label class="active" for="nome">Nome:</label>
+    	  <input type="text"    id="nome" name="nome" class="validate">
+    	</div>
+    	
+    	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
+    </div>
+   </form>
+ </div>
+ 
+ </fieldset>
+ 
+ <table class="striped">
+ <thead>
+    <tr>
+     <th>ID</th>
+     <th>Login</th>
+     <th>Senha</th>
+     <th>Nome</th>
+     <th>Excluir</th>
+    </tr>
+  </thead>
+   <tr th:each="us : ${usuarios}">
+    <td th:text="${us.id}"/>
+     <td th:text="${us.login}"/>
+     <td th:text="${us.senha}"/>
+     <td th:text="${us.nome}"/>
+     <td><a th:href="@{/removerusuario/{idusuario}(idusuario=${us.id})}">Excluir</a> </td>
+   </tr>
+ </table>
+
+ <script type="text/javascript">
+  function validarCampos(){
+	  login = document.getElementById('login').value;
+	  senha = document.getElementById('senha').value;
+	  nome = document.getElementById('nome').value;
+	  
+	  if (login === ''){
+		  alert('Login deve ser informado');
+		  return false;
+	  }
+	  else if (senha === '') {
+		  alert('Senha deve ser informado');
+		  return false;
+	  }
+	  else if (nome === '') {
+		  alert('Nome deve ser informado');
+		  return false;
+	  }
+
+	  
+	  return true;
+  }
+ </script>
+</body>
+</html>

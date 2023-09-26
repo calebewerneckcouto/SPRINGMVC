@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Min;
@@ -55,6 +56,13 @@ public class Pessoa implements Serializable {
 
 	
 	private String profissao;
+	
+	
+	
+	
+	
+	
+	
 
 	@OneToMany(mappedBy = "pessoa", orphanRemoval = true, cascade = CascadeType.ALL)
 	private List<Telefone> telefones;
@@ -217,6 +225,9 @@ public class Pessoa implements Serializable {
 	public void setDocumentos(List<Documentos> documentos) {
 		this.documentos = documentos;
 	}
+
+
+
 	
 	
 
