@@ -52,7 +52,7 @@ public class DocumentoController {
 		doc.setPessoa(pessoa);
 		
 		documentoRepository.save(doc);
-		
+		modelAndView.addObject("msg", "Salvo!");
 		modelAndView.addObject("pessoaobj", pessoa);
 	
 		modelAndView.addObject("documentos", documentoRepository.getdocumentos(pessoaid));
@@ -122,6 +122,7 @@ public class DocumentoController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/documentos");
 		
 		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("msg", "Documento Excluido!!");
 		
 		modelAndView.addObject("documentos", documentoRepository.getdocumentos(iddocumento));
 		return modelAndView;

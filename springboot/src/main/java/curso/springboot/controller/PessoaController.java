@@ -115,6 +115,7 @@ public class PessoaController{
 		andView.addObject("pessoas", pessoaRepository.findAll(PageRequest.of(0, 5, Sort.by("nome"))));
 		andView.addObject("profissoes", profissaoRepository.findAll());
 		andView.addObject("pessoaobj", new Pessoa());
+		andView.addObject("msg", "Salvo!");
 			
 		return andView;
 
@@ -154,6 +155,7 @@ public class PessoaController{
 		modelAndView.addObject("pessoas", pessoaRepository.findAll(PageRequest.of(0, 5, Sort.by("nome"))));
 		modelAndView.addObject("pessoaobj", new Pessoa());
 		modelAndView.addObject("profissoes", profissaoRepository.findAll());
+		modelAndView.addObject("msg", "Pessoa foi excluida!");
 		return modelAndView;
 		
 	}
@@ -283,7 +285,7 @@ public class PessoaController{
 		telefone.setPessoa(pessoa);
 		
 		telefoneRepository.save(telefone);
-		
+		modelAndView.addObject("msg", "Telefone foi Salvo");
 		modelAndView.addObject("pessoaobj", pessoa);
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoaid));
 		return modelAndView;
@@ -298,6 +300,7 @@ public class PessoaController{
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/telefones");
 		modelAndView.addObject("pessoaobj", pessoa);
+		modelAndView.addObject("msg", "Telefone foi removido!");
 		modelAndView.addObject("telefones", telefoneRepository.getTelefones(pessoa.getId()));
 		return modelAndView;
 		

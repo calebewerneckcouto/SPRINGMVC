@@ -31,10 +31,21 @@ form input[type=submit] {
             padding: 20px;
             border: 1px solid #ccc;
         }
+        
+        
+        .mensagem {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+        }
 </style> 	
 </head>
 <body>
-	
+	<br/>
+    <div th:each = "m : ${msg}">
+        <span  class="mensagem"  th:text = "${m}"> </span>
+    </div>
+<br/>
 
 <fieldset>
 
@@ -44,14 +55,14 @@ form input[type=submit] {
 		<div class="row">
 			<div class="input-fiel col s12">
 				<label>Login</label> 
-				<input type='text' name='username'>
+				<input type='text' name='username'  required="required">
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="input-fiel col s12">
 				<label>Senha</label> 
-				<input type='password' name='password' />
+				<input type='password' name='password' required="required"/>
 			</div>
 		</div>
 

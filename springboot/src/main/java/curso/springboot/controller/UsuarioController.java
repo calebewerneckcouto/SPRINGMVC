@@ -53,7 +53,7 @@ public class UsuarioController {
 		usuarioRepository.save(usuario);
 		
 		
-		
+		modelAndView.addObject("msg", "Usuario Salvo");
 		
 		
 		
@@ -95,7 +95,7 @@ public class UsuarioController {
 		
 		ModelAndView modelAndView = new ModelAndView("cadastro/usuarios");
 		modelAndView.addObject("pessoaobj", new Pessoa());
-	
+		modelAndView.addObject("msg", "Usuario Excluido");
 		modelAndView.addObject("usuarios", usuarioRepository.findAll());
 		return modelAndView;
 		

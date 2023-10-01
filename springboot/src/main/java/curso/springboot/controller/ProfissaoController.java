@@ -42,7 +42,7 @@ public class ProfissaoController {
 		
 		
 		profissaoRepository.save(profissao2);
-		
+		modelAndView.addObject("msg", "Profissão Salva");
 		
 		modelAndView.addObject("profissoes", profissaoRepository.findAll());
 
@@ -60,6 +60,7 @@ public class ProfissaoController {
 		ModelAndView modelAndView = new ModelAndView("cadastro/profissao");
 	
 		modelAndView.addObject("profissoes", profissaoRepository.findAll());
+		modelAndView.addObject("msg", "Profissão foi excluida!");
 		return modelAndView;
 		
 	}

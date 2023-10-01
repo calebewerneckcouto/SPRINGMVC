@@ -46,6 +46,14 @@ table th {
  background: #eee;
 }
 
+
+
+.mensagem {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
 </style>
 
 
@@ -63,6 +71,9 @@ table th {
 <a  href="/profissao">Cad.Profissão</a>	
 <br/>
 <a  href="/usuarios">Cad.Usuarios</a>	
+<br/>
+
+
 
 </fieldset>
 
@@ -74,7 +85,7 @@ table th {
 
 <br/>
     <div th:each = "m : ${msg}">
-        <span th:text = "${m}"> </span>
+        <span  class="mensagem" th:text = "${m}"> </span>
     </div>
 <br/>
 

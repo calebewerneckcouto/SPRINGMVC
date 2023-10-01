@@ -19,9 +19,25 @@ table.striped>tbody>tr:nth-child(odd) {
 form input[type=submit] {
  color: white;
 }
-</style>
+
+
+
+        .mensagem {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+
+
+
+
+
 </head>
 <body>
+
+
 <fieldset>
 
 <legend>Menu</legend>
@@ -42,11 +58,7 @@ form input[type=submit] {
 
  
 
-<br/>
-    <div th:each = "m : ${msg}">
-        <span th:text = "${m}"> </span>
-    </div>
-<br/>
+
  
  <div class="row">
    <form th:action="@{/addprofissao/}"  method="post" class="col s12" onsubmit="return validarCampos()? true : false">
@@ -63,6 +75,16 @@ form input[type=submit] {
     	
     	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
     </div>
+    
+    
+    <br/>
+    <div th:each = "m : ${msg}">
+        <span class="mensagem"   th:text = "${m}"> </span>
+    </div>
+<br/>
+    
+    
+    
    </form>
  </div>
  
