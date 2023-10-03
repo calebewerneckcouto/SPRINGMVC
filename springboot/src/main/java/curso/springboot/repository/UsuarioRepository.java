@@ -16,7 +16,8 @@ public interface UsuarioRepository extends CrudRepository<Usuario, Long> {
 	@Query("select u from Usuario u where u.login = ?1")
 	Usuario findUserByLogin(String login);
 	
-	
+	@Query("SELECT DISTINCT u FROM Usuario u JOIN FETCH u.roles")
+	List<Usuario> findAllUsuariosWithRoles();
 
 	    
 	

@@ -92,7 +92,7 @@ form input[type=submit] {
  <thead>
     <tr>
      <th>ID</th>
-     <th>Usuario ID</th>
+     <th>Usuario</th>
       <th>Role ID</th>
     
      <th>Excluir</th>
@@ -101,7 +101,7 @@ form input[type=submit] {
    <tr th:each="p : ${permissoes}">
     <td th:text="${p.id}"/>
    <td th:text="${p.nome}"/>
-    <td th:text="${p.roles.role}"/>
+    <td th:text="${p.roles}"/>
 
    
 

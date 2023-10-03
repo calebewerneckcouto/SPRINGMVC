@@ -39,12 +39,12 @@ public class PermissaoController {
 		
 		modelAndView.addObject("usuarios",usuarios);
 		List<Role> roles = roleRepository.findAll();
+		
+		
+		
+		List<Usuario> usuariosrole = usuarioRepository.findAllUsuariosWithRoles();
+		modelAndView.addObject("permissoes",usuariosrole);
 		modelAndView.addObject("roles",roles);
-		
-		
-		
-		
-		
 		
 		return modelAndView;
 	

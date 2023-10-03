@@ -3,6 +3,7 @@ package curso.springboot.model;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -34,10 +35,10 @@ public class Usuario implements UserDetails {
 	
 		
 	
-	@OneToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "usuarios_role", 
-	    joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), // Mapeando a coluna usuario_id para a tabela usuario
-	    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id") // Mapeando a coluna role_id para a tabela role
+	@OneToMany(fetch = FetchType.EAGER,orphanRemoval = true,cascade = CascadeType.REMOVE)
+	@JoinTable(name = "usuarios", 
+	    joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id"), // Mapeando a coluna usuario_id para a tabela usuario
+	    inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "id") // Mapeando a coluna role_id para a tabela role
 	)
 	private List<Role> roles;
 
