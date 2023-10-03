@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SpringBoot/Profissão</title>
+
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd) {
+	background-color: rgba(158, 154, 154, 0.5);
+}
+
+form input[type=submit] {
+ color: white;
+}
+
+
+
+        .mensagem {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+
+
+
+
+
+
+</head>
+<body>
+
+
+<fieldset>
+
+<legend>Menu</legend>
+ <a href="/spring/logout"><span>Logout</span></a>
+ 
+ <br/>
+<a  href="/spring/profissao">Cad.Profissão</a>	
+<br/>
+<a  href="/spring/usuarios">Cad.Usuarios</a>	
+
+</fieldset>
+
+
+ <fieldset>
+ 
+ <legend>Profissões</legend>
+  <a class="waves-effect waves-light btn" href="/spring/cadastropessoa">Cad. Pessoa</a>
+
+ 
+
+
+ 
+ <div class="row">
+   <form th:action="@{/addprofissao/}"  method="post" class="col s12" onsubmit="return validarCampos()? true : false">
+    <div class="row">
+    	<div class="input-field col s6">
+    	  <label class="active" for="id">ID:</label>
+    	  <input id="id" name="id" class="validate" readonly="readonly">
+    	</div>
+    	
+    	<div class="input-field col s6">
+    	  <label class="active" for="profissao">Profissão:</label>
+    	  <input id="profissao" name="profissao" class="validate" required="required">
+    	</div>
+    	
+    	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
+    </div>
+    
+    
+    <br/>
+    <div th:each = "m : ${msg}">
+        <span class="mensagem"   th:text = "${m}"> </span>
+    </div>
+<br/>
+    
+    
+    
+   </form>
+ </div>
+ 
+ </fieldset>
+ 
+ <table class="striped">
+ <thead>
+    <tr>
+     <th>ID</th>
+     <th>Profissão</th>
+     <th>Excluir</th>
+    </tr>
+  </thead>
+   <tr th:each="prof : ${profissoes}">
+     <td th:text="${prof.id}"/>
+     <td th:text="${prof.profissao}"/>
+     <td><a th:href="@{/removerprofissao/{idprofissao}(idprofissao=${prof.id})}">Excluir</a> </td>
+   </tr>
+ </table>
+
+ <script type="text/javascript">
+  function validarCampos(){
+	  profissao = document.getElementById('profissao').value;
+	  
+	  
+	  if (profissao === ''){
+		  alert(' A Profissão deve ser informada');
+		  return false;
+	  }
+	 
+	  return true;
+  }
+ </script>
+</body>
+</html>

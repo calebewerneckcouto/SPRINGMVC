@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>SpringBoot/Documentos</title>
+
+ <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+      
+<style type="text/css">
+table.striped>tbody>tr:nth-child(odd) {
+	background-color: rgba(158, 154, 154, 0.5);
+}
+
+form input[type=submit] {
+ color: white;
+}
+
+
+.mensagem {
+            color: blue;
+            font-size: 18px;
+            font-weight: bold;
+        }
+</style>
+</head>
+<body>
+
+<fieldset>
+
+<legend>Menu</legend>
+ <a href="/spring/logout"><span>Logout</span></a>
+ 
+ <br/>
+<a  href="/spring/profissao">Cad.Profissão</a>	
+<br/>
+<a  href="/spring/usuarios">Cad.Usuarios</a>	
+</fieldset>
+
+<fieldset>
+<legend>Cadastro de Documentos</legend>
+
+ 
+ <a class="waves-effect waves-light btn" href="/spring/cadastropessoa">Cad. Pessoa</a>
+ <div th:each="p : ${pessoaobj}">
+     <div class="row">
+       <p>ID: <span th:text="${p.id}"></span></p>
+       <p>Nome: <span th:text="${p.nome}"></span></p>
+       <p>Sobrenome: <span th:text="${p.sobrenome}"></span></p>
+       <p>Idade: <span th:text="${p.idade}"></span></p>
+     </div>
+ </div>
+ 
+ </fieldset>
+ 
+ <fieldset>
+ 
+ <legend>Documentos</legend>
+ 
+
+ 
+
+<br/>
+    <div th:each = "m : ${msg}">
+        <span  class="mensagem"  th:text = "${m}"> </span>
+    </div>
+<br/>
+ 
+ <div class="row">
+   <form th:action="@{/upload/{pessoaid}(pessoaid=${pessoaobj.id})}" id="formpessoa" method="post" th:object="${pessoaobj}" class="col s12" 
+  enctype="multipart/form-data">
+    <div class="row">
+    	<div class="input-field col s6">
+    	  <label class="active" for="descricao">Descricão:</label>
+    	  <input id="descricao" name="descricao" class="validate" required="required">
+    	</div>
+    	
+    	
+    	<div class="row">
+			  <div class="input-field col s12">
+			  <label for="file" class="active">Arquivo:</label>
+			    <input type="file" id="file" name="file" class="validate" required="required">
+			  </div>
+			</div>
+    	
+    	
+    	
+    	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
+    </div>
+   </form>
+ </div>
+ 
+ </fieldset>
+ 
+ <table class="striped">
+ <tr>
+     <th>ID</th>
+     <th>Descrição</th>
+     <th>Tipo de Arquivo</th>
+    <th>Download</th>
+     <th>Excluir</th>
+    </tr>
+   <tr th:each="doc : ${documentos}">
+     <td th:text="${doc.id}"/>
+        <td th:text="${doc.descricao}"/>
+           <td th:text="${doc.tipofile}"/>
+     <td><a th:href="@{/baixarfile/{iddocumento}(iddocumento=${doc.id})}">Download</a> </td>
+     <td><a th:href="@{/removerdocumento/{iddocumento}(iddocumento=${doc.id})}">Excluir</a> </td>
+   </tr>
+ </table>
+
+ <script type="text/javascript">
+  function validarCampos(){
+	  descricao = document.getElementById('descricao').value;
+	 
+	  
+	  if (descricao === ''){
+		  alert('Descricao deve ser informada');
+		  return false;
+	  }
+	  
+	  
+	  return true;
+  }
+ </script>
+</body>
+</html>

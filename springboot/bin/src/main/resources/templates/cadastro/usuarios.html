@@ -20,6 +20,7 @@ form input[type=submit] {
  color: white;
 }
 
+
 .mensagem {
             color: blue;
             font-size: 18px;
@@ -31,7 +32,7 @@ form input[type=submit] {
 <fieldset>
 
 <legend>Menu</legend>
- <a href="/spring/logout"><span>Logout</span></a>
+ <a  href="/spring/logout">Logout</a>	
  
  <br/>
 <a  href="/spring/profissao">Cad.Profissão</a>	
@@ -59,27 +60,23 @@ form input[type=submit] {
 <br/>
  
  <div class="row">
-    <form th:action="@{/addpermissao/}"  method="post" class="col s12" onsubmit="return validarCampos()? true : false">
+    <form th:action="@{/addusuario/}"  method="post" class="col s12" onsubmit="return validarCampos()? true : false">
     <div class="row">
+    	<div class="input-field col s6">
+    	  <label class="active" for="login">Login:</label>
+    	  <input id="login" name="login" class="validate">
+    	</div>
     	
-    	 <div class="input-field col s6">
-				 <label for="usuarioId" class="active">Usuarios</label>
-				 <select class="browser-default" th:field="*{usuarios}" id="usuarioId">
-						<option th:each = "u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}">
-				 </select>
-			 </div>
-			 
-			 
-			 
-			 
-			 <div class="input-field col s6">
-				 <label for="roleId" class="active">Roles</label>
-				 <select class="browser-default" th:field="*{roles}" id="roleId">
-						<option th:each = "u : ${roles}" th:value="${u.id}" th:text="${u.nomeRole}">
-				 </select>
-			 </div>
+    	<div class="input-field col s6">
+    	  <label class="active" for="senha">Senha:</label>
+    	  <input type="password"    id="senha" name="senha" class="validate">
+    	</div>
     	
     	
+    	<div class="input-field col s6">
+    	  <label class="active" for="nome">Nome:</label>
+    	  <input type="text"    id="nome" name="nome" class="validate">
+    	</div>
     	
     	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
     </div>
@@ -88,9 +85,47 @@ form input[type=submit] {
  
  </fieldset>
  
- 
+ <table class="striped">
+ <thead>
+    <tr>
+     <th>ID</th>
+     <th>Login</th>
+     <th>Senha</th>
+     <th>Nome</th>
+     <th>Excluir</th>
+    </tr>
+  </thead>
+   <tr th:each="us : ${usuarios}">
+    <td th:text="${us.id}"/>
+     <td th:text="${us.login}"/>
+     <td th:text="${us.senha}"/>
+     <td th:text="${us.nome}"/>
+     <td><a th:href="@{/removerusuario/{idusuario}(idusuario=${us.id})}">Excluir</a> </td>
+   </tr>
+ </table>
+
  <script type="text/javascript">
- 
+  function validarCampos(){
+	  login = document.getElementById('login').value;
+	  senha = document.getElementById('senha').value;
+	  nome = document.getElementById('nome').value;
+	  
+	  if (login === ''){
+		  alert('Login deve ser informado');
+		  return false;
+	  }
+	  else if (senha === '') {
+		  alert('Senha deve ser informado');
+		  return false;
+	  }
+	  else if (nome === '') {
+		  alert('Nome deve ser informado');
+		  return false;
+	  }
+
+	  
+	  return true;
+  }
  </script>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>SpringBoot/Usuarios</title>
+<title>SpringBoot/Role</title>
 
  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Compiled and minified CSS -->
@@ -19,6 +19,7 @@ table.striped>tbody>tr:nth-child(odd) {
 form input[type=submit] {
  color: white;
 }
+
 
 .mensagem {
             color: blue;
@@ -41,45 +42,38 @@ form input[type=submit] {
 </fieldset>
 
 <fieldset>
-<legend>Cadastro de Usuarios</legend>
+<legend>Cadastro de Roles</legend>
 
 
  <a class="waves-effect waves-light btn" href="/spring/cadastropessoa">Cad. Pessoa</a>
+ 
+ </fieldset>
  <fieldset>
  
- <legend>Usuarios</legend>
+ <legend>Roles</legend>
  
 
  
 
 <br/>
     <div th:each = "m : ${msg}">
-        <span  class="mensagem"  th:text = "${m}"> </span>
+        <span class="mensagem" th:text = "${m}"> </span>
     </div>
 <br/>
  
  <div class="row">
-    <form th:action="@{/addpermissao/}"  method="post" class="col s12" onsubmit="return validarCampos()? true : false">
+   <form th:action="@{/addrole/}"
+    method="post" class="col s12" onsubmit="return validarCampos()? true : false">
     <div class="row">
+    	<div class="input-field col s6">
+    	  <label class="active" for="id">ID:</label>
+    	  <input id="id" name="id" class="validate" readonly="readonly">
+    	</div>
     	
-    	 <div class="input-field col s6">
-				 <label for="usuarioId" class="active">Usuarios</label>
-				 <select class="browser-default" th:field="*{usuarios}" id="usuarioId">
-						<option th:each = "u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}">
-				 </select>
-			 </div>
-			 
-			 
-			 
-			 
-			 <div class="input-field col s6">
-				 <label for="roleId" class="active">Roles</label>
-				 <select class="browser-default" th:field="*{roles}" id="roleId">
-						<option th:each = "u : ${roles}" th:value="${u.id}" th:text="${u.nomeRole}">
-				 </select>
-			 </div>
-    	
-    	
+    	<div class="input-field col s6">
+    	  <label class="active" for="nomerole">Role:</label>
+    	  <input id="nomerole" name="nomerole" class="validate">
+    	</div>
     	
     	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
     </div>
@@ -88,9 +82,25 @@ form input[type=submit] {
  
  </fieldset>
  
- 
+ <table class="striped">
+ <thead>
+    <tr>
+     <th>ID</th>
+     <th>Nome Role</th>
+    
+     <th>Excluir</th>
+    </tr>
+  </thead>
+   <tr th:each="r : ${roles}">
+    <td th:text="${r.id}"/>
+  <td th:text="${r.nomeRole}"></td>
+
+     <td><a th:href="@{/removerrole/{idrole}(idrole=${r.id})}">Excluir</a> </td>
+   </tr>
+ </table>
+
  <script type="text/javascript">
- 
+  
  </script>
 </body>
 </html>

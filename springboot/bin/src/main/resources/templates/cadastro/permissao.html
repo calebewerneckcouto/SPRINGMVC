@@ -63,8 +63,8 @@ form input[type=submit] {
     <div class="row">
     	
     	 <div class="input-field col s6">
-				 <label for="usuarioId" class="active">Usuarios</label>
-				 <select class="browser-default" th:field="*{usuarios}" id="usuarioId">
+				 <label for="usuarios" class="active">Usuarios</label>
+				 <select class="browser-default" th:field="*{usuarios}" id="usuarios">
 						<option th:each = "u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}">
 				 </select>
 			 </div>
@@ -73,11 +73,14 @@ form input[type=submit] {
 			 
 			 
 			 <div class="input-field col s6">
-				 <label for="roleId" class="active">Roles</label>
-				 <select class="browser-default" th:field="*{roles}" id="roleId">
-						<option th:each = "u : ${roles}" th:value="${u.id}" th:text="${u.nomeRole}">
+				 <label for="permissao" class="active">Permissão</label>
+				 <select class="browser-default" id="permissao"  >
+				   <option value="" disabled selected>--[Selecione]--</option>
+				   <option value="1" th:text="Admin"/>
+				   <option value="2" th:text="User"/>
 				 </select>
-			 </div>
+				</div>
+			</div>
     	
     	
     	
