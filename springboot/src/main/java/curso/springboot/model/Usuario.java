@@ -36,15 +36,11 @@ public class Usuario implements UserDetails {
 	
 	@OneToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "usuarios_role", 
-	     joinColumns = @JoinColumn(name = "usuario_id", 
-	                   referencedColumnName = "id",
-	                   table = "usuario"),  // cria tabela de acesso do usuário
-			
-			inverseJoinColumns = @JoinColumn(name="role_id",
-								referencedColumnName = "id",
-								table = "role"))
-	
+	    joinColumns = @JoinColumn(name = "usuario_id", referencedColumnName = "id"), // Mapeando a coluna usuario_id para a tabela usuario
+	    inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id") // Mapeando a coluna role_id para a tabela role
+	)
 	private List<Role> roles;
+
 	
 
 	public Long getId() {
@@ -124,7 +120,10 @@ public class Usuario implements UserDetails {
 		this.nome = nome;
 	}
 	
-	
+	public Usuario getUsuario() {
+	    return getUsuario();
+	}
+
 	
 
 }

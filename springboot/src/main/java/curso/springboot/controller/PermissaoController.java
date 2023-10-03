@@ -2,6 +2,7 @@ package curso.springboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,7 @@ public class PermissaoController {
 	UsuarioRepository usuarioRepository;
 	
 	
+	
 	@RequestMapping(method = RequestMethod.GET, value = "/permitir")
 	public ModelAndView permissao() {
 	
@@ -38,6 +40,12 @@ public class PermissaoController {
 		modelAndView.addObject("usuarios",usuarios);
 		List<Role> roles = roleRepository.findAll();
 		modelAndView.addObject("roles",roles);
+		
+		
+		
+		
+		
+		
 		return modelAndView;
 	
 	}

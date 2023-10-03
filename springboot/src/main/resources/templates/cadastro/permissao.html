@@ -63,8 +63,8 @@ form input[type=submit] {
     <div class="row">
     	
     	 <div class="input-field col s6">
-				 <label for="usuarioId" class="active">Usuarios</label>
-				 <select class="browser-default" th:field="*{usuarios}" id="usuarioId">
+				 <label for="id" class="active">Usuarios</label>
+				 <select class="browser-default" th:field="*{usuarios}" id="id">
 						<option th:each = "u : ${usuarios}" th:value="${u.id}" th:text="${u.nome}">
 				 </select>
 			 </div>
@@ -73,8 +73,8 @@ form input[type=submit] {
 			 
 			 
 			 <div class="input-field col s6">
-				 <label for="roleId" class="active">Roles</label>
-				 <select class="browser-default" th:field="*{roles}" id="roleId">
+				 <label for="role" class="active">Roles</label>
+				 <select class="browser-default" th:field="*{roles}" id="role">
 						<option th:each = "u : ${roles}" th:value="${u.id}" th:text="${u.nomeRole}">
 				 </select>
 			 </div>
@@ -88,9 +88,29 @@ form input[type=submit] {
  
  </fieldset>
  
- 
+ <table class="striped">
+ <thead>
+    <tr>
+     <th>ID</th>
+     <th>Usuario ID</th>
+      <th>Role ID</th>
+    
+     <th>Excluir</th>
+    </tr>
+  </thead>
+   <tr th:each="p : ${permissoes}">
+    <td th:text="${p.id}"/>
+   <td th:text="${p.nome}"/>
+    <td th:text="${p.roles.role}"/>
+
+   
+
+     <td><a th:href="@{/removerpermissao/{idpermissao}(idpermissao=${p.id})}">Excluir</a> </td>
+   </tr>
+ </table>
+
  <script type="text/javascript">
- 
+  
  </script>
 </body>
 </html>
