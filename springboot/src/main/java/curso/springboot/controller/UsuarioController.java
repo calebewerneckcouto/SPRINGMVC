@@ -31,7 +31,7 @@ public class UsuarioController {
 	
 	
 	@PostMapping("**/addusuario/")
-	public ModelAndView addFonePessoa(@RequestParam("login") String login,@RequestParam("senha") String senha,@RequestParam("nome") String nome) {
+	public ModelAndView addFonePessoa(@RequestParam("login") String login,@RequestParam("senha") String senha,@RequestParam("nome") String nome,@RequestParam("roles") String nomeRole) {
 		
 		
 		Usuario usuario = new Usuario();
@@ -48,7 +48,7 @@ public class UsuarioController {
 		usuario.setLogin(login);
 		usuario.setSenha(result);
 		usuario.setNome(nome);
-		
+		usuario.setNomeRole(nomeRole);
 		
 		usuarioRepository.save(usuario);
 		

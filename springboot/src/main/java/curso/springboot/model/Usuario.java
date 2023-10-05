@@ -5,22 +5,18 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.ForeignKey;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity
-public class Usuario implements UserDetails {
+public class Usuario implements UserDetails , GrantedAuthority  {
 
 	private static final long serialVersionUID = 1L;
 
@@ -33,14 +29,23 @@ public class Usuario implements UserDetails {
 	private String nome;
 	
 	
-		
 	
-	@OneToMany(fetch = FetchType.EAGER,orphanRemoval = true,cascade = CascadeType.REMOVE)
-	@JoinTable(name = "usuarios", 
-	    joinColumns = @JoinColumn(name = "userid", referencedColumnName = "id"), // Mapeando a coluna usuario_id para a tabela usuario
-	    inverseJoinColumns = @JoinColumn(name = "roleid", referencedColumnName = "id") // Mapeando a coluna role_id para a tabela role
-	)
-	private List<Role> roles;
+private String nomeRole;
+	
+	@ForeignKey(name="id")
+	@ManyToOne
+	private Usuario usuario;
+	
+	
+
+	@Override
+	public String getAuthority() { // ROLE_ADMIN , ROLE_GERENTE, ROLE_SECRETARIO
+		return this.nomeRole;
+	}
+	
+		
+	@OneToMany(mappedBy = "usuario", orphanRemoval = true, cascade = CascadeType.ALL)
+	private List<Usuario> roles;
 
 	
 
@@ -103,16 +108,6 @@ public class Usuario implements UserDetails {
 		return true;
 	}
 
-	
-
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
 	public String getNome() {
 		return nome;
 	}
@@ -120,9 +115,29 @@ public class Usuario implements UserDetails {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	
+
+	public String getNomeRole() {
+		return nomeRole;
+	}
+
+	public void setNomeRole(String nomeRole) {
+		this.nomeRole = nomeRole;
+	}
+
 	public Usuario getUsuario() {
-	    return getUsuario();
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public List<Usuario> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<Usuario> roles) {
+		this.roles = roles;
 	}
 
 	

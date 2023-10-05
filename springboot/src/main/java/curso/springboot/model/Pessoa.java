@@ -40,7 +40,7 @@ public class Pessoa implements Serializable {
 	@NotEmpty(message = "Sobrenome não pode ser vazio")
 	private String sobrenome;
 
-	@Min(value = 18, message = "Idade inválida")
+	@Min(value = 10, message = "Idade inválida")
 	private int idade;
 
 	private String cep;

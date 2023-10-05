@@ -78,6 +78,21 @@ form input[type=submit] {
     	  <input type="text"    id="nome" name="nome" class="validate">
     	</div>
     	
+    	
+    	<div class="input-field col s6">
+				 <label for="roles" class="active">Role</label>
+				 <select class="browser-default" name="roles">
+				   <option value="" disabled selected>--[Selecione]--</option>
+				   <option value="ROLE_ADMIN" th:text="Admin"/>
+				   <option value="ROLE_USER" th:text="User"/>
+				 </select>
+				</div>
+			</div>
+    	
+    	
+    	
+    	
+    	
     	<input type="submit" value="Adicionar"  class="waves-effect waves-light btn">
     </div>
    </form>
@@ -92,6 +107,7 @@ form input[type=submit] {
      <th>Login</th>
      <th>Senha</th>
      <th>Nome</th>
+     <th>Permissão</th>
      <th>Excluir</th>
     </tr>
   </thead>
@@ -100,6 +116,7 @@ form input[type=submit] {
      <td th:text="${us.login}"/>
      <td th:text="${us.senha}"/>
      <td th:text="${us.nome}"/>
+      <td th:text="${us.nomeRole}"/>
      <td><a th:href="@{/removerusuario/{idusuario}(idusuario=${us.id})}">Excluir</a> </td>
    </tr>
  </table>
