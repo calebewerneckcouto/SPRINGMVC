@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>SpringBoot/Usuarios</title>
@@ -37,7 +38,7 @@ form input[type=submit] {
  <br/>
 <a  href="/spring/profissao">Cad.Profissão</a>	
 <br/>
-<a  href="/spring/usuarios">Cad.Usuarios</a>	
+<a sec:authorize="hasAnyRole('ROLE_ADMIN')"      href="/spring/usuarios">Cad.Usuarios</a>	
 
 </fieldset>
 
@@ -108,7 +109,7 @@ form input[type=submit] {
      <th>Senha</th>
      <th>Nome</th>
      <th>Permissão</th>
-     <th>Excluir</th>
+     <th sec:authorize="hasAnyRole('ROLE_ADMIN')"  >Excluir</th>
     </tr>
   </thead>
    <tr th:each="us : ${usuarios}">
@@ -117,7 +118,7 @@ form input[type=submit] {
      <td th:text="${us.senha}"/>
      <td th:text="${us.nome}"/>
       <td th:text="${us.nomeRole}"/>
-     <td><a th:href="@{/removerusuario/{idusuario}(idusuario=${us.id})}">Excluir</a> </td>
+     <td  sec:authorize="hasAnyRole('ROLE_ADMIN')"   ><a th:href="@{/removerusuario/{idusuario}(idusuario=${us.id})}">Excluir</a> </td>
    </tr>
  </table>
 

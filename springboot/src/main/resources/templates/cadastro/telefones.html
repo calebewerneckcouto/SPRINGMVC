@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
 <meta charset="UTF-8">
 <title>SpringBoot/Telefones</title>
@@ -37,7 +38,7 @@ form input[type=submit] {
  <br/>
 <a  href="/spring/profissao">Cad.Profissão</a>	
 <br/>
-<a  href="/spring/usuarios">Cad.Usuarios</a>	
+<a sec:authorize="hasAnyRole('ROLE_ADMIN')"      href="/spring/usuarios">Cad.Usuarios</a>	
 <br/>
 
 

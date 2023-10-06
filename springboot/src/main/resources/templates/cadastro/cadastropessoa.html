@@ -70,8 +70,9 @@ table th {
  <br/>
 <a  href="/spring/profissao">Cad.Profissão</a>	
 <br/>
-<a  href="/spring/usuarios">Cad.Usuarios</a>	
-<br/>
+<a sec:authorize="hasAnyRole('ROLE_ADMIN')"      href="/spring/usuarios">Cad.Usuarios</a>	
+
+</fieldset>
 
 
 
