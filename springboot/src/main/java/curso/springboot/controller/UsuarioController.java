@@ -49,6 +49,7 @@ public class UsuarioController {
 		usuario.setSenha(result);
 		usuario.setNome(nome);
 		usuario.setNomeRole(nomeRole);
+		usuario.setUsuario(usuario);
 		
 		usuarioRepository.save(usuario);
 		
